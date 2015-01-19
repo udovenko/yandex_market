@@ -12,10 +12,10 @@ module YandexMarket
   end
 
   class Configuration
-    attr_accessor :option
+    attr_accessor :products
 
     def initialize
-      @option = 'default_option'
+      @products = 'default_option'
     end
   end
 end
