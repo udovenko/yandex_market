@@ -1,4 +1,4 @@
-module Jem
+module YandexMarket
   module Generators
     class InstallGenerator < Rails::Generators::Base
       source_root File.expand_path("../../templates", __FILE__)
@@ -7,7 +7,7 @@ module Jem
       def copy_initializer
         template "yandex_market_initializer.rb", "config/initializers/yandex_market.rb"
 
-        puts "Install complete! Truly Outrageous!"
+        puts "Install complete!"
       end
     end
   end

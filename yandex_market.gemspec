@@ -6,10 +6,11 @@ require 'yandex_market/version'
 Gem::Specification.new do |spec|
   spec.name          = "yandex_market"
   spec.version       = YandexMarket::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.authors       = ["Denis Udovenko"]
+  spec.email         = ["denis.e.udovenko@gmail.com"]
+  spec.summary       = %q{Creates Yandex Market Languge file}
+  spec.description   = %q{Creates Yandex Market Languge file for exporting 
+    categories and products data from your shop app}
   spec.homepage      = ""
   spec.license       = "MIT"
 
