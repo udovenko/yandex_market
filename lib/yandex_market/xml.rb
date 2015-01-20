@@ -21,6 +21,7 @@ module YandexMarket
           shop_details
           currencies
           categories
+          offers
         end
       end
       
@@ -81,7 +82,12 @@ module YandexMarket
         
         @builder.offers do
           offers.each do |offer|
-            
+            @builder.offer id: offer[:id], available: offer[:available] do
+              @builder.url offer[:url] if offer[:url]
+              @builder.price offer[:price]
+              @builder.currencyId offer[:currency_id]
+              @builder.categoryId(offer[:category_id], type: "Own") if offer[:category_id]
+            end
           end
         end
       end
