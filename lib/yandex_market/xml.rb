@@ -1,6 +1,10 @@
 require "builder"
 
 module YandexMarket
+  
+  
+  #
+  #
   class Xml
     
     
@@ -16,11 +20,9 @@ module YandexMarket
         @builder.shop do
           shop_details
           currencies
+          categories
         end
       end
-      
-      #xml = builder.person { |b| b.name("Jim"); b.phone("555-1234") }
-      #xml #=> <person><name>Jim</name><phone>555-1234</phone></person>
       
       save
     end
@@ -49,6 +51,37 @@ module YandexMarket
         @builder.currencies do
           YandexMarket::configuration.shop[:currencies].each do |currency|
             @builder.currency id: currency[:id], rate: currency[:rate], plus: currency[:plus]
+          end
+        end
+      end
+      
+      
+      # Builds categories list.
+      def self.categories
+        
+        # Accept categories as an array or as a proc result:
+        categories = YandexMarket::configuration.shop[:categories]
+        categories = categories.call if categories.class == Proc
+        
+        @builder.categories do
+          categories.each do |category|
+            @builder.category category[:name], {id: category[:id]} \
+              .merge(category[:parent_id] ? { parentId: category[:parent_id] } : {})
+          end
+        end
+      end
+      
+      
+      # Builds offers list.
+      def self.offers
+        
+        # Accept offers as an array or as a proc result:
+        offers = YandexMarket::configuration.shop[:offers]
+        offers = offers.call if offers.class == Proc
+        
+        @builder.offers do
+          offers.each do |offer|
+            
           end
         end
       end

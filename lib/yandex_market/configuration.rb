@@ -19,11 +19,9 @@ module YandexMarket
         company: "dummy_company",
         url:     "http://dummy_url.com",
         currencies: [],
-        categories: []
+        categories: [],
+        offers:     []
       }
-      
-      
-      #@products_collection = Product ? Product.all : []
     end
   end
 end  
