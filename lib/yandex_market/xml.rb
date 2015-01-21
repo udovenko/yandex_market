@@ -41,9 +41,12 @@ module YandexMarket
       
       # Builds shop details information.
       def self.shop_details
-        @builder.name    YandexMarket::configuration.shop[:name]
-        @builder.company YandexMarket::configuration.shop[:company]
-        @builder.url     YandexMarket::configuration.shop[:url]
+        shop_details_keys = [:name, :company, :url, :local_delivery_cost]
+        shop_details = YandexMarket::configuration.shop.slice *shop_details_keys
+        
+        shop_details.each do |key, value|
+          @builder.tag! key, value
+        end
       end
       
       
@@ -66,8 +69,7 @@ module YandexMarket
         
         @builder.categories do
           categories.each do |category|
-            @builder.category category[:name], {id: category[:id]} \
-              .merge(category[:parent_id] ? { parentId: category[:parent_id] } : {})
+            @builder.category category
           end
         end
       end
@@ -79,14 +81,18 @@ module YandexMarket
         # Accept offers as an array or as a proc result:
         offers = YandexMarket::configuration.shop[:offers]
         offers = offers.call if offers.class == Proc
-        
+               
         @builder.offers do
+          
           offers.each do |offer|
-            @builder.offer id: offer[:id], available: offer[:available] do
-              @builder.url offer[:url] if offer[:url]
-              @builder.price offer[:price]
-              @builder.currencyId offer[:currency_id]
-              @builder.categoryId(offer[:category_id], type: "Own") if offer[:category_id]
+            attribute_keys = [:id, :type, :available];
+            attributes = offer.slice *attribute_keys
+            nodes = offer.except *attribute_keys
+            
+            @builder.offer attributes do
+              nodes.each do |key, value|
+                @builder.tag! key, value, {}.merge(key == :categoryId ? { type: "Own" } : {})
+              end
             end
           end
         end

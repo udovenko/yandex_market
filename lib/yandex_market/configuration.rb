@@ -13,7 +13,7 @@ module YandexMarket
     #
     #
     def initialize
-      @file_name = "snippets.xml"
+      @file_name = "yandex_market.xml"
       @shop = {
         name:    "dummy_shop",
         company: "dummy_company",
