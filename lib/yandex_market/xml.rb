@@ -3,8 +3,10 @@ require "builder"
 module YandexMarket
   
   
+  # Builds YandexMarket XML file based on configuration.
   #
-  #
+  # @author Denis Udovenko
+  # @version 1.0.3
   class Xml
     
     
