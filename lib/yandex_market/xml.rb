@@ -68,8 +68,10 @@ module YandexMarket
         categories = categories.call if categories.class == Proc
         
         @builder.categories do
+          
           categories.each do |category|
-            @builder.category category
+            attributes = category.slice :id, :parentId
+            @builder.category category[:name], attributes
           end
         end
       end
