@@ -12,8 +12,8 @@ module YandexMarket
   end
 
   
-  #
-  #
+  # Creates gem configuration instance. Accepts block with configuration 
+  # instructions.
   def self.configure
     self.configuration ||= Configuration.new
     yield(configuration)

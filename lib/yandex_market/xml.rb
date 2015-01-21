@@ -1,5 +1,6 @@
 require "builder"
 
+
 module YandexMarket
   
   
@@ -10,8 +11,7 @@ module YandexMarket
   class Xml
     
     
-    #
-    #
+    # Builds XML file and saves it to Rails public directory.
     def self.build
       @output = ""
       @builder = Builder::XmlMarkup.new(target: @output)
@@ -23,6 +23,7 @@ module YandexMarket
           shop_details
           currencies
           categories
+          local_delivery_cost
           offers
         end
       end
@@ -43,7 +44,7 @@ module YandexMarket
       
       # Builds shop details information.
       def self.shop_details
-        shop_details_keys = [:name, :company, :url, :local_delivery_cost]
+        shop_details_keys = [:name, :company, :url, :phone]
         shop_details = YandexMarket::configuration.shop.slice *shop_details_keys
         
         shop_details.each do |key, value|
@@ -76,6 +77,13 @@ module YandexMarket
             @builder.category category[:name], attributes
           end
         end
+      end
+      
+      
+      # Adds local delivery cost tag.
+      def self.local_delivery_cost
+        shop = YandexMarket::configuration.shop
+        @builder.local_delivery_cost shop[:local_delivery_cost] if shop[:local_delivery_cost]
       end
       
       

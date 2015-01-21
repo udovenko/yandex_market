@@ -1,30 +1,29 @@
 # YandexMarket
 
-TODO: Write a gem description
+Simple Rails gem for creating Yandex Market Language XML file.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'yandex_market'
+gem 'yandex_market', git: 'git://github.com/udovenko/yandex_market.git'
 ```
 
 And then execute:
 
-    $ bundle
+    $ bundle install
+    $ rails g yandex_market:install
 
-Or install it yourself as:
-
-    $ gem install yandex_market
+Last command will create initializer with name "yandex_market.rb" in your Rails initializers directory.
 
 ## Usage
 
-TODO: Write usage instructions here
+Check out the initializer structure and http://help.yandex.ru/webmaster/goods-prices/technical-requirements.xml.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/yandex_market/fork )
+1. Fork it (https://github.com/[my-github-username]/yandex_market/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
